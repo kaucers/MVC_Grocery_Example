@@ -6,7 +6,6 @@ class ProductsController extends BaseController {
   }
 
   async insertOne(req, res) {
-    /** This mehtod will be used to add a new product into the store */
     const { name, price } = req.body;
     console.log(req.body);
 
@@ -25,8 +24,6 @@ class ProductsController extends BaseController {
   }
 
   async getOne(req, res) {
-    console.log("getting shit ");
-    /** This method will be used to get one item from the products table */
     const id = req.params.productId;
     try {
       const output = await this.model.findByPk(id);
