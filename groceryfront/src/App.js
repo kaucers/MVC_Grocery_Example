@@ -70,7 +70,6 @@ export default function App() {
                 <p>Failure</p>
               )}
             </div>
-
             <AddProduct addProduct={createNewProduct} />
           </div>
         )}

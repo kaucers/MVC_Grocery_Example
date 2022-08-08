@@ -1,7 +1,5 @@
 import React from "react";
-
 import { useState, useEffect } from "react";
-
 import axios from "axios";
 
 export default function SingleProduct(props) {
@@ -11,7 +9,6 @@ export default function SingleProduct(props) {
     let response = await axios.get(
       `${process.env.REACT_APP_API_SERVER}/products/${props.id}`
     );
-
     setProduct(response.data);
   };
 
