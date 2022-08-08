@@ -6,10 +6,6 @@ import SingleProduct from "./Components/SingleProduct";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-// Turn all class based components into functions
-// use async and await
-// use axios
-
 export default function App() {
   const [openSingle, setOpenSingle] = useState(false);
   const [products, setProducts] = useState([]);
