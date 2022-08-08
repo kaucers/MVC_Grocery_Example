@@ -6,7 +6,7 @@
 
 To run the backend of this application you will first need to
 
-`cd groceryback`
+`cd groceryBack`
 
 Then run the command:
 
@@ -32,7 +32,7 @@ If you have yet to install nodemon as a global package.
 
 To run the frontend of this application you will first need to
 
-`cd groceryfront`
+`cd groceryFront`
 
 Then run the command:
 
