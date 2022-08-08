@@ -6,6 +6,8 @@ export default function AddProduct(props) {
 
   const submit = () => {
     props.addProduct(name, price);
+    setName("");
+    setPrice("");
   };
 
   return (

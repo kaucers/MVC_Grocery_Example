@@ -32,11 +32,10 @@ export default function App() {
       name,
       price,
     };
-    let response = axios.post(
+    let response = await axios.post(
       `${process.env.REACT_APP_API_SERVER}/products`,
       product
     );
-    console.log(response);
     let newArray = [...products];
     newArray.push(response.data);
     setProducts(newArray);

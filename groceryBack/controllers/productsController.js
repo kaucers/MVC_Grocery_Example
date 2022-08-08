@@ -7,8 +7,6 @@ class ProductsController extends BaseController {
 
   async insertOne(req, res) {
     const { name, price } = req.body;
-    console.log(req.body);
-
     try {
       const newProduct = await this.model.create({
         updated_at: new Date(),
@@ -16,7 +14,6 @@ class ProductsController extends BaseController {
         name: name,
         price: price,
       });
-
       return res.json(newProduct);
     } catch (err) {
       return res.status(400).json({ error: true, msg: err });
