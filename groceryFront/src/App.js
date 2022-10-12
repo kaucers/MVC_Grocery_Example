@@ -15,6 +15,7 @@ export default function App() {
     let initialAPICall = await axios.get(
       `${process.env.REACT_APP_API_SERVER}/products`
     );
+    console.log(initialAPICall.data);
     setProducts(initialAPICall.data);
   };
 
