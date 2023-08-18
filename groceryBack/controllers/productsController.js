@@ -1,4 +1,4 @@
-const BaseController = require("./baseController");
+const BaseController = require('./baseController');
 
 class ProductsController extends BaseController {
   constructor(model) {
@@ -27,6 +27,46 @@ class ProductsController extends BaseController {
       return res.json(output);
     } catch (err) {
       console.log(err);
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
+
+  async updateOne(req, res) {
+    const id = req.params.productId;
+    const { name, price } = req.body;
+
+    try {
+      const updatedProduct = await this.model.update(
+        { name, price },
+        { where: { id } }
+      );
+
+      if (updatedProduct[0] === 1) {
+        const updatedData = await this.model.findByPk(id);
+        return res.json(updatedData);
+      } else {
+        return res.status(404).json({ error: true, msg: 'Product not found' });
+      }
+    } catch (err) {
+      console.error(err);
+      return res.status(400).json({ error: true, msg: err });
+    }
+  }
+
+  async deleteOne(req, res) {
+    const id = req.params.productId;
+    try {
+      const deletedProduct = await this.model.destroy({
+        where: { id },
+      });
+
+      if (deletedProduct === 1) {
+        return res.json({ message: 'Product deleted successfully' });
+      } else {
+        return res.status(404).json({ error: true, msg: 'Product not found' });
+      }
+    } catch (err) {
+      console.error(err);
       return res.status(400).json({ error: true, msg: err });
     }
   }

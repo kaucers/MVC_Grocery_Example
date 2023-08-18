@@ -7,9 +7,15 @@ class ProductsRouter {
   routes() {
     const router = this.express.Router();
 
-    router.get("/", this.controller.getAll.bind(this.controller));
-    router.get("/:productId", this.controller.getOne.bind(this.controller));
-    router.post("/", this.controller.insertOne.bind(this.controller));
+    router.get('/', this.controller.getAll.bind(this.controller));
+    router.get('/:productId', this.controller.getOne.bind(this.controller));
+    router.post('/', this.controller.insertOne.bind(this.controller));
+    router.put('/:productId', this.controller.updateOne.bind(this.controller));
+    router.delete(
+      '/:productId',
+      this.controller.deleteOne.bind(this.controller)
+    );
+
     return router;
   }
 }
