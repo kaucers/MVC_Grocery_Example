@@ -1,15 +1,16 @@
-import logo from "./logo.png";
-import "./App.css";
-import React from "react";
-import AddProduct from "./Components/AddProduct";
-import SingleProduct from "./Components/SingleProduct";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import logo from './logo.png';
+import './App.css';
+import React from 'react';
+import AddProduct from './Components/AddProduct';
+import SingleProduct from './Components/SingleProduct';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { Card } from 'react-bootstrap';
 
 export default function App() {
   const [openSingle, setOpenSingle] = useState(false);
   const [products, setProducts] = useState([]);
-  const [currentId, setCurrentId] = useState("");
+  const [currentId, setCurrentId] = useState('');
 
   const getInitialData = async () => {
     let initialAPICall = await axios.get(
@@ -42,32 +43,41 @@ export default function App() {
     setProducts(newArray);
   };
 
+  const handleProductDelete = (deletedProductId) => {
+    setProducts((prevProducts) =>
+      prevProducts.filter((product) => product.id !== deletedProductId)
+    );
+
+    setOpenSingle(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className='App'>
+      <header className='App-header'>
         {openSingle ? (
           <div>
-            <SingleProduct toggle={toggleView} id={currentId} />
+            <SingleProduct
+              toggle={toggleView}
+              id={currentId}
+              onDelete={handleProductDelete}
+            />
           </div>
         ) : (
           <div>
-            <img src={logo} className="App-logo" alt="logo" />
-            <h3>Grocery Store</h3>
-            <h6>Products</h6>
-            <div className="products-container">
+            <img src={logo} className='App-logo' alt='logo' />
+            <h3>Grocery Store Products</h3>
+            <div className='products-container'>
               {products && products.length > 0 ? (
                 products.map((product) => (
-                  <div
-                    className="product"
-                    key={product.id}
-                    onClick={() => toggleView(product)}
-                  >
-                    <h4>{product.name}</h4>
-                    <h5>${product.price}</h5>
-                  </div>
+                  <Card className='product' onClick={() => toggleView(product)}>
+                    <Card.Body>
+                      <Card.Title>{product.name}</Card.Title>
+                      <Card.Text>${product.price}</Card.Text>
+                    </Card.Body>
+                  </Card>
                 ))
               ) : (
-                <p>Failure</p>
+                <p>No products available</p>
               )}
             </div>
             <AddProduct addProduct={createNewProduct} />
